@@ -45,6 +45,7 @@ class DBStorage:
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
+                print('class name is: ',cls)
                 objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
@@ -84,8 +85,10 @@ class DBStorage:
         """ Counts the number of objects in storage """
         if cs is None:
             return len(self.all())
-        elif cs in classes.values():
+        elif cs in classes.values(): 
             return len(self.all(cls))
+        elif cs in classes.keys():
+            return len(self.all(cs))
         else:
             return 0
 
