@@ -144,4 +144,4 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertEqual(storage.count(), 3)
         self.assertEqual(storage.count(State), 2)
-        self.assertEqual(storage.count(HBNB), 0)
+        self.assertEqual(storage.count(Place), 0)
