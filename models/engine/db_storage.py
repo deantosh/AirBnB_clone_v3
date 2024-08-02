@@ -84,8 +84,10 @@ class DBStorage:
         """ Counts the number of objects in storage """
         if cs is None:
             return len(self.all())
-        elif cs in classes.values():
+        elif cs in classes.values(): 
             return len(self.all(cls))
+        elif cs in classes.keys():
+            return len(self.all(cs))
         else:
             return 0
 
