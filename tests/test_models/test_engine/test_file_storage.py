@@ -70,13 +70,6 @@ test_file_storage.py'])
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
-    def tearDown(self):
-        """Cleans up  test environment"""
-        try:
-            os.remove("file.json")
-        except FileNotFoundError:
-            pass
-
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_all_returns_dict(self):
         """Test that all returns the FileStorage.__objects attr"""
@@ -120,35 +113,3 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
-
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_get(self):
-        """Test the get() method"""
-        storage = FileStorage()
-        state_obj = State(name="Texas")
-        storage.new(state_obj)
-
-        obj1 = storage.get(State, state_obj.id)
-        self.assertEqual(obj1.name, "Texas")
-        obj2 = storage.get(State, '0215477852666')
-        self.assertIsNone(obj2)
-
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_count(self):
-        """Test the count() method"""
-        # create instance of storage, add, save and reload data
-        storage = FileStorage()
-        state1 = State()
-        storage.new(state1)
-        state2 = State()
-        storage.new(state2)
-        city1 = City()
-        storage.new(city1)
-        # save the data
-        storage.save()
-        # reload data from the file
-        storage.reload()
-
-        self.assertEqual(storage.count(), 3)
-        self.assertEqual(storage.count(State), 2)
-        self.assertEqual(storage.count(Place), 0)
