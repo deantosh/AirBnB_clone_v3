@@ -89,8 +89,8 @@ class TestDBStorage(unittest.TestCase):
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get(self):
-        """Test the get() method"""
+        """Test the db storage get() method"""
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
-        """Test the count() method"""
+        """Test the db storage count() method"""
