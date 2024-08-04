@@ -12,8 +12,8 @@ from models.place import Place
 from models.user import User
 
 
-@app_viewe.route('/places/<place_id>/reviews', methods=['GET'],
-                strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
+                 strict_slashes=False)
 def get_reviews(place_id):
     """Retrieves the list of all review objects of place"""
     place = storage.get(Place, place_id)
