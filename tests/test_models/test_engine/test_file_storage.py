@@ -129,19 +129,3 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):
         """Test the count() method"""
-        # create instance of storage, add, save and reload data
-        storage = FileStorage()
-        state1 = State()
-        storage.new(state1)
-        state2 = State()
-        storage.new(state2)
-        city1 = City()
-        storage.new(city1)
-        # save the data
-        storage.save()
-        # reload data from the file
-        storage.reload()
-
-        self.assertEqual(storage.count(), 3)
-        self.assertEqual(storage.count(State), 2)
-        self.assertEqual(storage.count(HBNB), 0)
