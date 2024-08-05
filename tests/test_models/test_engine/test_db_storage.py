@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-Module defines a test for DBStorage class
+Contains the TestDBStorageDocs and TestDBStorage classes
 """
+
 from datetime import datetime
 import inspect
-import models import storage_type
+import models
 from models.engine import db_storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -67,54 +68,21 @@ test_db_storage.py'])
                             "{:s} method needs a docstring".format(func[0]))
 
 
-@unittest.skipIf(storage_type != 'db', "Testing database storage only")
-class TestDBStorage(unittest.TestCase):
-    """Test the DBStorage class"""
-
+class TestFileStorage(unittest.TestCase):
+    """Test the FileStorage class"""
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_returns_dict(self):
-        """Test that all method: returns a dictionaty"""
+        """Test that all returns a dictionaty"""
+        self.assertIs(type(models.storage.all()), dict)
 
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_no_class(self):
-        """
-        Test that all method:
-            returns all rows when no class is passed
-        """
+        """Test that all returns all rows when no class is passed"""
 
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_new(self):
-        """Test that new method: adds an object to the database"""
+        """test that new adds an object to the database"""
 
+    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
-        """
-        Test that save method:
-            properly saves objects to the database
-        """
-
-    def test_delete(self):
-        """
-        Test that delete method:
-            deletes object from current database session
-        """
-
-    def test_reload(self):
-        """
-        Test that reload method:
-            creates all table in the current database session
-        """
-
-    def test_close(self):
-        """
-        Test that the close method:
-            closes the current database session
-        """
-
-    def test_get(self):
-        """
-        Test get():
-             gets an object of specified id from storage
-        """
-
-    def test_count(self):
-        """
-        Test count():
-            counts the number of all objects or class objects
-        """
+        """Test that save properly saves objects to file.json"""
