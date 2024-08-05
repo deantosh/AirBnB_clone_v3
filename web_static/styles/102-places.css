@@ -67,3 +67,60 @@ article div.user{
 article div.user span{
     font-weight: bold;
 }
+
+/*amenities/reviews section*/
+.amenities{
+    padding: 10px 0;
+}
+article div.reviews h2,
+article div.amenities h2{
+       border-bottom: 1px solid #dddddd;
+}
+article div.amenities ul li{
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 60px;
+    height: 25px;
+    margin-bottom: 5px;
+}
+ul li span{
+    width: 50%;
+    float: right;
+    line-height: 25px;
+}
+ul li.icon1{
+    background-image: url("../images/tv_icon.png");
+}
+ul li.icon2{
+    background-image: url("../images/wifi_icon.png");
+}
+ul li.icon3{
+    background-image: url("../images/pet_icon.png");
+}
+article div.amenities h2,
+article div.reviews h2{
+    font-size: 16px;
+    text-align: left;
+    margin: 0;
+    padding: 10px 0;
+}
+article div.amenities ul,
+article div.reviews ul{
+    list-style-type: none;
+    margin: 15px 0;
+    padding: 0;
+}
+.reviews h3{
+    font-size: 14px;
+}
+.reviews p{
+    font-size: 12px;
+}
+
+/*Media queries for small devices*/
+@media(max-width: 600px){
+    section.places h1{
+        padding-left: 10px;
+    }
+}
