@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """
-Module defines Database engine `DBStorage`
+Module defines the `DBStorage` class
 """
 import os
 from models.base_model import Base
-from models.user import User
-from models.review import Review
-from models.place import Place
-from models.city import City
 from models.state import State
+from models.city import City
+from models.user import User
 from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
@@ -46,14 +46,14 @@ class DBStorage:
         if cls:
             # Handle class
             for obj in self.__session.query(cls).all():
-                key = "{type(obj).__name__}.{}".format(obj.id)
+                key = "{}.{}".format(type(obj).__name__, obj.id)
                 objs_dict[key] = obj
         else:
             # Handle all classes
             cls_list = [State, City, User, Review, Place, Amenity]
             for cls in cls_list:
                 for obj in self.__session.query(cls).all():
-                    key = "{type(obj).__name__}.{}".format(obj.id)
+                    key = "{}.{}".format(type(obj).__name__, obj.id)
                     objs_dict[key] = obj
         return objs_dict
 
@@ -81,3 +81,21 @@ class DBStorage:
     def close(self):
         """ Removes the current session """
         self.__session.remove()
+
+    def get(self, cls, id):
+        """ Retrieve a specified object from storage """
+        if cls is None or id is None:
+            return None
+        return self.__session.query(cls).get(id)
+
+    def count(self, cls=None):
+        """ Counts the all objects or class objects in storage """
+        class_list = [State, City, Amenity, Place, User, Review]
+        num_objs = 0
+        if cls is None:
+            for clss in class_list:
+                num_objs += self.__session.query(clss).count()
+        else:
+            num_objs += self.__session.query(cls).count()
+
+        return num_objs
