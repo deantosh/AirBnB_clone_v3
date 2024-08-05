@@ -31,7 +31,10 @@ class DBStorage:
     def __init__(self):
         """ Initialize database instance """
         self.__engine = create_engine(
-            f"mysql+mysqldb://{user}:{passwd}@{host}/{db}", pool_pre_ping=True)
+        "mysql+mysqldb://{user}:{passwd}@{host}/{db}".format(user=user,
+                                 passwd=passwd, host=host, db=db), pool_pre_ping=True)
+        # you can't use this style of string formatting on python version 3.4
+        # f"mysql+mysqldb://{user}:{passwd}@{host}/{db}", pool_pre_ping=True)
 
         if hbnb_env == "test":
             # Drop all tables if test environment
@@ -45,14 +48,14 @@ class DBStorage:
         if cls:
             # Handle class
             for obj in self.__session.query(cls).all():
-                key = f"{type(obj).__name__}.{obj.id}"
+                key = "{}.{}".format(type(obj).__name__, obj.id)
                 objs_dict[key] = obj
         else:
             # Handle all classes
             cls_list = [State, City, User, Review, Place, Amenity]
             for cls in cls_list:
                 for obj in self.__session.query(cls).all():
-                    key = f"{type(obj).__name__}.{obj.id}"
+                    key = "{}.{}".format(type(obj).__name__, obj.id)
                     objs_dict[key] = obj
         return objs_dict
 
@@ -80,3 +83,12 @@ class DBStorage:
     def close(self):
         """ Removes the current session """
         self.__session.remove()
+
+    def get(self, cls, id):
+        """
+        Returns the object based on the class name and
+        its ID, or None if not found.
+        """
+        if cls and id:
+            return self.__session.query(cls).filter_by(id=id).first()
+        return None
