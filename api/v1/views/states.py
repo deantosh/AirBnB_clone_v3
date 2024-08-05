@@ -10,7 +10,7 @@ from flask import jsonify, abort, request
 from werkzeug.exceptions import BadRequest
 
 
-@app_views.route('/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/', methods=['GET'])
 def get_all_states():
     """ Retrievs a list of all State objects """
     states_list = [state.to_dict() for state in storage.all(State).values()]
@@ -39,7 +39,7 @@ def delete_state(state_id):
         return jsonify({}), 200
 
 
-@app_views.route('/states', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/', methods=['POST'])
 def create_state():
     """ Creates a state object """
 
