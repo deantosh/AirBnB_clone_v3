@@ -30,8 +30,9 @@ class DBStorage:
 
     def __init__(self):
         """ Initialize database instance """
-        self.__engine = create_engine(
-            f"mysql+mysqldb://{user}:{passwd}@{host}/{db}", pool_pre_ping=True)
+        conn_string = "mysql+mysqldb://{}:{}@{}/{}".format(
+                      user, passwd, host, db)
+        self.__engine = create_engine(conn_string, pool_pre_ping=True)
 
         if hbnb_env == "test":
             # Drop all tables if test environment
@@ -45,14 +46,14 @@ class DBStorage:
         if cls:
             # Handle class
             for obj in self.__session.query(cls).all():
-                key = f"{type(obj).__name__}.{obj.id}"
+                key = "{type(obj).__name__}.{}".format(obj.id)
                 objs_dict[key] = obj
         else:
             # Handle all classes
             cls_list = [State, City, User, Review, Place, Amenity]
             for cls in cls_list:
                 for obj in self.__session.query(cls).all():
-                    key = f"{type(obj).__name__}.{obj.id}"
+                    key = "{type(obj).__name__}.{}".format(obj.id)
                     objs_dict[key] = obj
         return objs_dict
 
