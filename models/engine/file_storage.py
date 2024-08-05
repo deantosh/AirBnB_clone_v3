@@ -72,7 +72,7 @@ class FileStorage:
         """ Gets a specified object using its class and id """
         if cls is None or id is None:
             return None
-        all_objs = storage.all(cls)
+        all_objs = self.all(cls)
         key = "{}.{}".format(cls.__name__, id)
 
         return all_objs.get(key, None)
@@ -80,6 +80,6 @@ class FileStorage:
     def count(self, cls=None):
         """ Count all objects or objects of specified class """
         if cls is None:
-            return len(storage.all())
+            return len(self.all())
         else:
-            return len(storage.all(cls))
+            return len(self.all(cls))
