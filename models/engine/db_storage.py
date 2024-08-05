@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module defines Database engine `DBStorage`
+Module defines the `DBStorage` class
 """
 import os
 from models.base_model import Base
