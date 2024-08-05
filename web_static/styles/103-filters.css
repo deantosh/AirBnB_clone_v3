@@ -9,7 +9,7 @@ section.filters{
 }
 section.filters button{
     font-size: 18px;
-    background-color: #ff5a5f;
+    background-color: #cc3333;
     color: #ffffff;
     height: 48px;
     width: 20%;
@@ -20,22 +20,30 @@ section.filters button{
 section.filters button:hover{
     opacity: 90%;
 }
-section.filters div.locations, section.filters div.amenities{
+.location_amenity{
+    display: flex;
+    width: 50%;
     height: 100%;
-    width: 25%;
+}
+.locations,
+div.location_amenity .amenities{
+    height: 100%;
+    width: 50%;
     padding: 15px 0;
 }
-section.filters div.locations{
+.locations{
     border-right: 1px solid #dddddd;
 }
 
-section.filters div.locations h3, section.filters div.amenities h3{
+.locations h3,
+div.location_amenity .amenities h3{
     font-weight: 600;
     margin: 0;
     margin-left: 30px;
 }
 
-section.filters div.locations h4, section.filters div.amenities h4{
+.locations h4,
+div.location_amenity .amenities h4{
     font-weight: 400;
     font-size: 14px;
     margin: 0 0 0 30px;
@@ -65,5 +73,28 @@ ul.popover, ul.popover ul{
 /*hide the filter popover*/
 div.locations:hover ul.popover,
 div.amenities:hover ul.popover{
+    position: relative;
     display: block;
+}
+
+
+/*Media queries for small devices*/
+@media(max-width: 600px)
+{
+    section.filters{
+        height: 135px;
+        flex-wrap: wrap;
+        flex: 0, 0, auto;
+        padding: 0 10px;
+        border: none;
+    }
+    .location_amenity{
+        width: 100%;
+        height: 50%;
+        border-bottom: 4px solid #dddddd;
+    }
+    section.filters button{
+        height: 30px;
+        margin: 0 auto;
+    }
 }
