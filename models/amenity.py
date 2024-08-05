@@ -1,32 +1,21 @@
-#!/usr/bin/python3
-""" State Module for HBNB project """
-import os
-from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.orm import relationship
+#!/usr/bin/python
+""" holds class Amenity"""
+import models
 from models.base_model import BaseModel, Base
-
-
-# Get the storage type
-storage_type = os.getenv("HBNB_TYPE_STORAGE")
-
-# lazy import association table
-if storage_type == "db":
-    from models.place import place_amenity
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
-    """ Defines Amenity class """
-
-    if storage_type == "db":
+    """Representation of Amenity """
+    if models.storage_t == 'db':
         __tablename__ = 'amenities'
-        # Handle database storage
         name = Column(String(128), nullable=False)
-
-        # Many-to-Many relationship
-        place_amenities = relationship('Place',
-                                       secondary='place_amenity',
-                                       back_populates='amenities',
-                                       viewonly=False)
     else:
-        # Handle file storage
         name = ""
+
+    def __init__(self, *args, **kwargs):
+        """initializes Amenity"""
+        super().__init__(*args, **kwargs)
