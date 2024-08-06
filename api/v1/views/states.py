@@ -10,14 +10,14 @@ from flask import jsonify, abort, request
 from werkzeug.exceptions import BadRequest
 
 
-@app_views.route('/states/', methods=['GET'])
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
     """ Retrievs a list of all State objects """
     states_list = [state.to_dict() for state in storage.all(State).values()]
     return jsonify(states_list)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'])
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """ Retrieves a State object of a specified state_id """
     state_obj = storage.get(State, state_id)
@@ -27,7 +27,7 @@ def get_state(state_id):
         return jsonify(state_obj.to_dict())
 
 
-@app_views.route('states/<state_id>', methods=['DELETE'])
+@app_views.route('states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
     """ Deletes state object of a specified state_id """
     state_obj = storage.get(State, state_id)
@@ -39,7 +39,7 @@ def delete_state(state_id):
         return jsonify({}), 200
 
 
-@app_views.route('/states/', methods=['POST'])
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     """ Creates a state object """
 
@@ -57,7 +57,7 @@ def create_state():
         return jsonify(state_obj.to_dict()), 201
 
 
-@app_views.route('states/<state_id>', methods=['PUT'])
+@app_views.route('states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """ Updates state """
     state_obj = storage.get(State, state_id)
