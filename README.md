@@ -182,7 +182,7 @@ Jennifer Huang - [Github](https://github.com/jhuang10123) / [X](https://twitter.
 
 Second part of Airbnb: Joann Vuong
 
-AirBnB -- RESTFUL API part
+Third part of AirBnB:
 Deantosh Daiddoh - [Github](https://github.com/deantosh) / [X](https://x.com/daiddoh)
 Lucky Archibong - [Github](https://github.com/luckys-lnz) / [X](https://x.com/)
 
